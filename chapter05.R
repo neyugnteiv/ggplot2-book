@@ -88,4 +88,47 @@ ggplot(mpg) +
   geom_point(aes(class, cty)) + 
   geom_boxplot(aes(trans, hwy))
 
-#5.4 Geoms
+#5.5 Geoms
+#5.6 Stats
+ggplot(mpg, aes(trans, cty)) + 
+  geom_point() + 
+  stat_summary(geom='point', fun.y='mean', color='red', size=4)
+
+ggplot(mpg, aes(trans, cty)) + 
+  geom_point() + 
+  geom_point(stat='summary', fun.y='mean', color='red', size=4)
+
+#5.6.1 Generated Variables
+
+ggplot(diamonds, aes(price)) + geom_histogram(binwidth=500)
+ggplot(diamonds, aes(price)) + geom_histogram(aes(y=..density..), binwidth=500)
+
+ggplot(diamonds, aes(price, color=cut)) + 
+  geom_freqpoly(binwidth=500) + 
+  theme(legend.position='none')
+
+ggplot(diamonds, aes(price, color=cut)) + 
+  geom_freqpoly(aes(y=..density..), binwidth=500) + 
+  theme(legend.position='none')
+
+#5.7 POsition Adjustments
+dplot <- ggplot(diamonds, aes(color, fill=cut)) + 
+  xlab(NULL) + ylab(NULL) + theme(legend.position='none')
+dplot + geom_bar(position='stack')
+dplot + geom_bar(position='fill')
+dplot + geom_bar(position='dodge')
+
+dplot + geom_bar(position='identity', alpha=1/2, color='grey50')
+ggplot(diamonds, aes(color, color=cut)) + 
+  geom_line(aes(group=cut), stat='count') + xlab(NULL) + ylab(NULL) + 
+  theme(legend.position='none')
+
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point(position='jitter')
+
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point(position = position_jitter(width=0.05, height=0.5))
+
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_jitter(width=0.05, height=0.5)
+
