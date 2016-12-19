@@ -82,3 +82,12 @@ axs + scale_x_continuous(breaks=NULL)
 axs + scale_x_continuous(labels=NULL)
 leg + scale_fill_continuous(breaks=NULL)
 leg + scale_fill_continuous(labels=NULL)
+
+#6.4 Legends
+#6.4.1 Layers and Legends
+ggplot(df, aes(y, y)) + geom_point(size=4, color='grey20') + geom_point(aes(color=z), size=2)
+
+norm <- data.frame(x=rnorm(1000), y=rnorm(1000))
+norm$z <- cut(norm$x, 3, labels=c('a', 'b', 'c'))
+ggplot(norm, aes(x,y)) + geom_point(aes(color=z), alpha=0.1)
+ggplot(norm, aes(x, y)) + geom_point(aes(color=z), alpha=0.5) + guides(color=guide_legend(override.aes=list(alpha=1)))
