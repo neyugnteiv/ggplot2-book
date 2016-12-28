@@ -83,7 +83,6 @@ axs + scale_x_continuous(labels=NULL)
 leg + scale_fill_continuous(breaks=NULL)
 leg + scale_fill_continuous(labels=NULL)
 
-
 # 6.3 : Guides - Legends and Axes
 #6.3.1 Scale Title
 df <- data.frame(x=1:2, y=1, z='a')
@@ -153,6 +152,7 @@ base <- ggplot(df, aes(x, y)) + geom_raster(aes(fill=z))
 base
 base + scale_fill_continuous(guide=guide_legend())
 base + guides(fill=guide_legend())
+
 
 #6.4 Legends
 #6.4.1 Layers and Legends
