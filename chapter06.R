@@ -174,3 +174,33 @@ p
 p + guides(fill=guide_legend(reverse=TRUE))
 
 #6.5 Limits
+df <- data.frame(x=1:3, y=1:3)
+base <- ggplot(df, aes(x,y)) + geom_point()
+base
+base + scale_x_continuous(limits=c(1.5, 2.5))
+base + scale_x_continuous(limits=c(0,4))
+base + xlim(0,4)
+base + xlim(4,0)
+base + lims(x=c(0,4))
+
+ggplot(faithfuld, aes(waiting, eruptions)) + geom_raster(aes(fill=density)) + theme(legend.position='none')
+ggplot(faithfuld, aes(waiting, eruptions)) + geom_raster(aes(fill=density)) + scale_x_continuous(expand=c(0,0)) + scale_y_continuous(expand=c(0,0)) + theme(legend.position='none')
+
+df <- data.frame(x=1:5)
+p <- ggplot(df, aes(x, 1)) + geom_tile(aes(fill=x), color='white')
+p
+p + scale_fill_gradient(limits=c(2,4))
+p + scale_fill_gradient(limits=c(2,4), oob=scales::squish)
+
+# 6.6 Scales Toolbox
+#6.6.1: Continuous Position Scales
+ggplot(mpg, aes(displ, hwy)) + geom_point() + scale_y_continuous(trans='reciprocal')
+ggplot(diamonds, aes(price, carat)) + geom_bin2d() + scale_x_continuous(trans='log10') + scale_y_continuous(trans='log10')
+
+base <- ggplot(economics, aes(date, psavert)) + geom_line(na.rm=TRUE) + labs(x=NULL, y=NULL)
+base
+base + scale_x_date(date_labels='%Y', date_breaks='5 years')
+base + scale_x_date(limits = as.Date(c('2004-01-01', '2005-01-01')), date_labels='%b %y', date_minor_breaks='1 month')
+base + scale_x_date(limits = as.Date(c('2004-01-01', '2004-06-01')), date_labels='%m/%d', date_minor_breaks='2 weeks')
+
+#6.6.2 Colour
